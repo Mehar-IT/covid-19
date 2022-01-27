@@ -1,4 +1,4 @@
-import 'package:covid_app/splash_screen.dart';
+import 'package:covid_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
