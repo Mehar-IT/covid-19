@@ -23,8 +23,11 @@ class _CountryPageState extends State<CountryPage> {
         children: [
           Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
+              child: TextField(
                 controller: _controller,
+                onChanged: (value) {
+                  setState(() {});
+                },
                 decoration: InputDecoration(
                     hintText: 'Input Country Name',
                     contentPadding: EdgeInsets.symmetric(horizontal: 20),
@@ -61,15 +64,32 @@ class _CountryPageState extends State<CountryPage> {
                     return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                              title: Text(snapshot.data![index]['country']),
-                              subtitle: Text('Cases: ' +
-                                  snapshot.data![index]['cases'].toString()),
-                              leading: Image(
-                                  height: 60,
-                                  width: 70,
-                                  image: NetworkImage(snapshot.data![index]
-                                      ['countryInfo']['flag'])));
+                          String name = snapshot.data![index]['country'];
+                          if (_controller.text.isEmpty) {
+                            return ListTile(
+                                title: Text(snapshot.data![index]['country']),
+                                subtitle: Text('Cases: ' +
+                                    snapshot.data![index]['cases'].toString()),
+                                leading: Image(
+                                    height: 50,
+                                    width: 50,
+                                    image: NetworkImage(snapshot.data![index]
+                                        ['countryInfo']['flag'])));
+                          } else if (name
+                              .toLowerCase()
+                              .contains(_controller.text.toLowerCase())) {
+                            return ListTile(
+                                title: Text(snapshot.data![index]['country']),
+                                subtitle: Text('Cases: ' +
+                                    snapshot.data![index]['cases'].toString()),
+                                leading: Image(
+                                    height: 50,
+                                    width: 50,
+                                    image: NetworkImage(snapshot.data![index]
+                                        ['countryInfo']['flag'])));
+                          } else {
+                            return Container();
+                          }
                         });
                   }
                 }),
