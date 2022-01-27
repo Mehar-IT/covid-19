@@ -14,4 +14,14 @@ class StateServices {
       throw Exception('Data Not Found');
     }
   }
+
+  static Future<List<dynamic>> countryData() async {
+    Response response = await get(Uri.parse(AppUrls.countries));
+    var decodedData = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      return decodedData;
+    } else {
+      throw Exception('Data Not Found');
+    }
+  }
 }
