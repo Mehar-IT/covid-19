@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     Timer(
-        const Duration(seconds: 5),
+        const Duration(seconds: 3),
         () => Navigator.push(context,
             MaterialPageRoute(builder: (context) => const HomeScreen())));
     super.initState();
@@ -33,33 +33,30 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color(0xff292A2D),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AnimatedBuilder(
-              animation: _controller,
-              child: Center(child: Image.asset('images/virus.png')),
-              builder: (context, child) {
-                return Transform.rotate(
-                  angle: _controller.value * 2 * math.pi,
-                  child: child,
-                );
-              }),
-          SizedBox(height: 100),
-          Text(
-            'Covid-19\nTracker App',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              decoration: TextDecoration.none,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
-            ),
-          )
-        ],
-      ),
-    );
+    return Scaffold(
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AnimatedBuilder(
+            animation: _controller,
+            child: Center(child: Image.asset('images/virus.png')),
+            builder: (context, child) {
+              return Transform.rotate(
+                angle: _controller.value * 2 * math.pi,
+                child: child,
+              );
+            }),
+        SizedBox(height: 100),
+        Text(
+          'Covid-19\nTracker App',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
+        )
+      ],
+    ));
   }
 }
